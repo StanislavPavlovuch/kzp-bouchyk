@@ -1,0 +1,11 @@
+target/
+out/
+hello-world.jar
+
+.m2/
+.idea/
+*.iml
+.vscode/
+
+.DS_Store
+Thumbs.db
