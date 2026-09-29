@@ -29,11 +29,11 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Test on Windows
+      - name: Verify on Windows
         if: ${{ runner.os == 'Windows' }}
         shell: pwsh
-        run: .\mvnw.cmd -B test
+        run: .\mvnw.cmd -B verify
 
-      - name: Test on Unix
+      - name: Verify on Unix
         if: ${{ runner.os != 'Windows' }}
-        run: ./mvnw -B test
+        run: ./mvnw -B verify
