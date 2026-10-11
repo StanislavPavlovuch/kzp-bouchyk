@@ -7,6 +7,12 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Консольна програма для обробки даних про спортивні тренування.
+ * Програма читає CSV-файл, перевіряє записи, обчислює показники
+ * та формує звіт.
+ */
+
 public final class HelloApplication
 {
 
@@ -16,6 +22,11 @@ public final class HelloApplication
     {
     }
 
+/**
+ * Запускає програму та обробляє аргументи командного рядка.
+ *
+ * @param args аргументи командного рядка
+ */
     public static void main(String[] args)
     {
         Path inputPath = Path.of("data/input.csv");
@@ -95,7 +106,12 @@ public final class HelloApplication
             );
         }
     }
-
+/**
+ * Перевіряє записи про тренування та обчислює підсумкові показники.
+ *
+ * @param lines рядки вхідного CSV-файла
+ * @return сформований текст звіту
+ */
     static String buildReport(List<String> lines)
     {
         int validCount = 0;
@@ -180,7 +196,15 @@ public final class HelloApplication
                 maxCalories
         );
     }
-
+/**
+ * Формує текст звіту з обчислених показників.
+ *
+ * @param validCount кількість коректних записів
+ * @param totalMinutes сумарний час тренувань
+ * @param totalDistance сумарна дистанція
+ * @param maxCalories найбільша витрата калорій
+ * @return готовий текст звіту
+ */
     static String formatReport(
             int validCount,
             int totalMinutes,
