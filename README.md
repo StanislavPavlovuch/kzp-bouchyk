@@ -107,7 +107,7 @@ date;kind;minutes;distanceKm;calories
 Після успішної збірки створюється файл:
 
 ```text
-target/maven-actions-hello-0.1.0-all.jar
+target/maven-actions-hello-1.0.0-all.jar
 ```
 
 ## Запуск програми
@@ -115,7 +115,7 @@ target/maven-actions-hello-0.1.0-all.jar
 Зі стандартними шляхами:
 
 ```bash
-java -jar target/maven-actions-hello-0.1.0-all.jar
+java -jar target/maven-actions-hello-1.0.0-all.jar
 ```
 
 Або без попереднього пакування:
@@ -145,13 +145,13 @@ java -cp target/classes ua.lpnu.kzp.setup.HelloApplication --input data/input.cs
 Перевірка версії:
 
 ```bash
-java -jar target/maven-actions-hello-0.1.0-all.jar --version
+java -jar target/maven-actions-hello-1.0.0-all.jar --version
 ```
 
 Поточний результат:
 
 ```text
-maven-actions-hello 0.1.0
+maven-actions-hello 1.0.0
 ```
 
 ## Приклад результату

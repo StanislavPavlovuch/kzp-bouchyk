@@ -16,7 +16,7 @@ import java.util.Locale;
 public final class HelloApplication
 {
 
-    private static final String VERSION = "0.1.0";
+    private static final String VERSION = "1.0.0";
 
     private HelloApplication()
     {
