@@ -281,13 +281,13 @@ CI виконує перевірку на:
 Після створення фінального Pull Request сюди буде додано пряме посилання на успішний запуск:
 
 ```text
-CI_LINK_AFTER_PR
+https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/42491484923
 ```
 
 JAR-артефакт:
 
 ```text
-ARTIFACT_LINK_AFTER_PR
+https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/42491484923
 ```
 
 ---
@@ -313,7 +313,7 @@ https://github.com/StanislavPavlovuch/kzp-bouchyk/issues
 Фінальний Pull Request лабораторної №2:
 
 ```text
-PR_LINK_AFTER_CREATE
+https://github.com/StanislavPavlovuch/kzp-bouchyk/pull/18
 ```
 
 У Pull Request буде використано `Closes` для Issues №11–17.
@@ -490,10 +490,10 @@ v1.1.0
 
 ```text
 GitHub: https://github.com/StanislavPavlovuch/kzp-bouchyk
-Pull Request: PR_LINK_AFTER_CREATE
-CI: CI_LINK_AFTER_PR
-JAR artifact: ARTIFACT_LINK_AFTER_PR
-Git tag: TAG_LINK_AFTER_MERGE
+Pull Request: https://github.com/StanislavPavlovuch/kzp-bouchyk/pull/18
+CI: https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/42491484923
+JAR artifact: https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/42491484923
+Git tag: https://github.com/StanislavPavlovuch/kzp-bouchyk/tree/v1.1.0
 ```
 
 Отримана структура є основою для лабораторної роботи №3, у якій предметні об'єкти будуть об'єднуватися в ієрархію типів і використовуватися поліморфно.
