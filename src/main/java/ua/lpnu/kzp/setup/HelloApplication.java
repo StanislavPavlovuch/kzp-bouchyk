@@ -68,84 +68,41 @@ public final class HelloApplication
     static String buildReport(List<String> lines)
     {
         int validCount = 0;
-        int totalMinutes = 0;
-        double totalDistance = 0;
         int maxCalories = 0;
+
+        DurationDistance totals = new DurationDistance(0, 0);
 
         for (int i = 0; i < lines.size(); i++)
         {
             String line = lines.get(i);
             int lineNumber = i + 1;
 
-            if (line.isBlank())
-            {
-                System.out.printf(
-                        "Рядок %d пропущено: порожній рядок.%n",
-                        lineNumber
-                );
-                continue;
-            }
-
-            String[] fields = line.split(";", -1);
-
-            if (fields.length != 5)
-            {
-                System.out.printf(
-                        "Рядок %d пропущено: неправильна кількість полів.%n",
-                        lineNumber
-                );
-                continue;
-            }
-
-            String date = fields[0].trim();
-            String kind = fields[1].trim();
-
-            if (date.isEmpty() || kind.isEmpty())
-            {
-                System.out.printf(
-                        "Рядок %d пропущено: порожнє обов'язкове поле.%n",
-                        lineNumber
-                );
-                continue;
-            }
-
             try
             {
-                int minutes = Integer.parseInt(fields[2].trim());
-                double distanceKm = Double.parseDouble(fields[3].trim());
-                int calories = Integer.parseInt(fields[4].trim());
-
-                if (minutes < 0 || distanceKm < 0 || calories < 0)
-                {
-                    System.out.printf(
-                            "Рядок %d пропущено: числові значення не можуть бути від'ємними.%n",
-                            lineNumber
-                    );
-                    continue;
-                }
+                Training training = Training.fromCsv(line);
 
                 validCount++;
-                totalMinutes += minutes;
-                totalDistance += distanceKm;
+                totals = totals.add(training);
 
-                if (calories > maxCalories)
+                if (training.getCalories() > maxCalories)
                 {
-                    maxCalories = calories;
+                    maxCalories = training.getCalories();
                 }
             }
-            catch (NumberFormatException e)
+            catch (IllegalArgumentException e)
             {
                 System.out.printf(
-                        "Рядок %d пропущено: неправильне числове значення.%n",
-                        lineNumber
+                        "Рядок %d пропущено: %s%n",
+                        lineNumber,
+                        e.getMessage()
                 );
             }
         }
 
         return formatReport(
                 validCount,
-                totalMinutes,
-                totalDistance,
+                totals.minutes(),
+                totals.distanceKm(),
                 maxCalories
         );
     }
