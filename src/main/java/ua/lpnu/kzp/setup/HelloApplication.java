@@ -9,8 +9,6 @@ import java.util.Locale;
  */
 public final class HelloApplication
 {
-    private static final String VERSION = "1.0.0";
-
     private HelloApplication()
     {
     }
@@ -36,7 +34,7 @@ public final class HelloApplication
             {
                 System.out.printf(
                         "maven-actions-hello %s%n",
-                        VERSION
+                        getVersion()
                 );
                 return;
             }
@@ -135,6 +133,25 @@ public final class HelloApplication
                 totalDistance,
                 maxCalories
         );
+    }
+
+    /**
+     * Отримує версію програми з маніфесту зібраного JAR.
+     *
+     * @return версія програми
+     */
+    private static String getVersion()
+    {
+        String version = HelloApplication.class
+                .getPackage()
+                .getImplementationVersion();
+
+        if (version == null || version.isBlank())
+        {
+            return "development";
+        }
+
+        return version;
     }
 
     private static void printHelp()
