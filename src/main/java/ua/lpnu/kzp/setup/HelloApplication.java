@@ -1,101 +1,53 @@
 package ua.lpnu.kzp.setup;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
 
 /**
  * Консольна програма для обробки даних про спортивні тренування.
- * Програма читає CSV-файл, перевіряє записи, обчислює показники
- * та формує звіт.
  */
-
 public final class HelloApplication
 {
-
     private static final String VERSION = "1.0.0";
 
     private HelloApplication()
     {
     }
 
-/**
- * Запускає програму та обробляє аргументи командного рядка.
- *
- * @param args аргументи командного рядка
- */
+    /**
+     * Запускає програму.
+     *
+     * @param args аргументи командного рядка
+     */
     public static void main(String[] args)
     {
-        Path inputPath = Path.of("data/input.csv");
-        Path outputPath = Path.of("data/report.txt");
-
-        for (int i = 0; i < args.length; i++)
-        {
-            switch (args[i])
-            {
-                case "--help" ->
-                {
-                    printHelp();
-                    return;
-                }
-                case "--version" ->
-                {
-                    System.out.printf("maven-actions-hello %s%n", VERSION);
-                    return;
-                }
-                case "--input" ->
-                {
-                    if (i + 1 >= args.length)
-                    {
-                        System.out.println("Після --input потрібно вказати шлях до файла.");
-                        return;
-                    }
-
-                    inputPath = Path.of(args[++i]);
-                }
-                case "--output" ->
-                {
-                    if (i + 1 >= args.length)
-                    {
-                        System.out.println("Після --output потрібно вказати шлях до файла.");
-                        return;
-                    }
-
-                    outputPath = Path.of(args[++i]);
-                }
-                default ->
-                {
-                    System.out.printf("Невідомий аргумент: %s%n", args[i]);
-                    printHelp();
-                    return;
-                }
-            }
-        }
-
         try
         {
-            List<String> lines = Files.readAllLines(
-                    inputPath,
-                    StandardCharsets.UTF_8
-            );
+            ProgramArguments arguments = ArgumentParser.parse(args);
 
-            String report = buildReport(lines);
+            if (arguments.isHelp())
+            {
+                printHelp();
+                return;
+            }
 
-            System.out.println();
-            System.out.print(report);
+            if (arguments.isVersion())
+            {
+                System.out.printf(
+                        "maven-actions-hello %s%n",
+                        VERSION
+                );
+                return;
+            }
 
-            Files.writeString(
-                    outputPath,
-                    report,
-                    StandardCharsets.UTF_8
-            );
-
+            TrainingController.run(arguments);
+        }
+        catch (IllegalArgumentException e)
+        {
             System.out.printf(
-                    "%nЗвіт збережено у: %s%n",
-                    outputPath
+                    "Помилка параметрів: %s%n",
+                    e.getMessage()
             );
         }
         catch (IOException e)
@@ -106,12 +58,13 @@ public final class HelloApplication
             );
         }
     }
-/**
- * Перевіряє записи про тренування та обчислює підсумкові показники.
- *
- * @param lines рядки вхідного CSV-файла
- * @return сформований текст звіту
- */
+
+    /**
+     * Перевіряє записи про тренування та обчислює підсумкові показники.
+     *
+     * @param lines рядки вхідного CSV-файла
+     * @return сформований текст звіту
+     */
     static String buildReport(List<String> lines)
     {
         int validCount = 0;
@@ -196,15 +149,16 @@ public final class HelloApplication
                 maxCalories
         );
     }
-/**
- * Формує текст звіту з обчислених показників.
- *
- * @param validCount кількість коректних записів
- * @param totalMinutes сумарний час тренувань
- * @param totalDistance сумарна дистанція
- * @param maxCalories найбільша витрата калорій
- * @return готовий текст звіту
- */
+
+    /**
+     * Формує текст звіту з обчислених показників.
+     *
+     * @param validCount кількість коректних записів
+     * @param totalMinutes сумарний час тренувань
+     * @param totalDistance сумарна дистанція
+     * @param maxCalories найбільша витрата калорій
+     * @return готовий текст звіту
+     */
     static String formatReport(
             int validCount,
             int totalMinutes,
