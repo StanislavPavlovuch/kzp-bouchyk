@@ -243,19 +243,19 @@ BUILD SUCCESS
 Виконуваний файл:
 
 ```text
-target/maven-actions-hello-1.1.0-all.jar
+target/maven-actions-hello-2.0.0-all.jar
 ```
 
 Перевірка версії:
 
 ```bash
-java -jar target/maven-actions-hello-1.1.0-all.jar --version
+java -jar target/maven-actions-hello-2.0.0-all.jar --version
 ```
 
 Результат:
 
 ```text
-maven-actions-hello 1.1.0
+maven-actions-hello 2.0.0
 ```
 
 Версія більше не дублюється константою у Java-коді.
@@ -263,7 +263,7 @@ maven-actions-hello 1.1.0
 Єдиним джерелом версії є:
 
 ```xml
-<version>1.1.0</version>
+<version>2.0.0</version>
 ```
 
 у `pom.xml`.
@@ -478,12 +478,12 @@ Arrange — підготовка даних, Act — виконання пере
 
 Зовнішня поведінка програми після рефакторингу не змінилася: на контрольному наборі даних отримано ті самі 3 коректні записи, 155 хвилин, 32.00 км і максимальну витрату 620 калорій.
 
-Версію продукту винесено в єдине джерело — `pom.xml`. Для лабораторної роботи №2 встановлено версію `1.1.0`.
+Версію продукту винесено в єдине джерело — `pom.xml`. Для лабораторної роботи №2 встановлено версію `2.0.0`.
 
 Після фінального злиття буде створено Git-тег:
 
 ```text
-v1.1.0
+v2.0.0
 ```
 
 Посилання:
@@ -493,7 +493,7 @@ GitHub: https://github.com/StanislavPavlovuch/kzp-bouchyk
 Pull Request: https://github.com/StanislavPavlovuch/kzp-bouchyk/pull/18
 CI: https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/42491484923
 JAR artifact: https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/42491484923
-Git tag: https://github.com/StanislavPavlovuch/kzp-bouchyk/tree/v1.1.0
+Git tag: https://github.com/StanislavPavlovuch/kzp-bouchyk/tree/v2.0.0
 ```
 
 Отримана структура є основою для лабораторної роботи №3, у якій предметні об'єкти будуть об'єднуватися в ієрархію типів і використовуватися поліморфно.

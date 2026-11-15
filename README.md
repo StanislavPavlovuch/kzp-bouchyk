@@ -39,7 +39,7 @@ java/lab02
 Поточна версія:
 
 ```text
-1.1.0
+2.0.0
 ```
 
 ## Збірка і перевірка
@@ -71,25 +71,25 @@ java/lab02
 Після збірки створюється:
 
 ```text
-target/maven-actions-hello-1.1.0-all.jar
+target/maven-actions-hello-2.0.0-all.jar
 ```
 
 ## Запуск
 
 ```bash
-java -jar target/maven-actions-hello-1.1.0-all.jar
+java -jar target/maven-actions-hello-2.0.0-all.jar
 ```
 
 Перевірка версії:
 
 ```bash
-java -jar target/maven-actions-hello-1.1.0-all.jar --version
+java -jar target/maven-actions-hello-2.0.0-all.jar --version
 ```
 
 Результат:
 
 ```text
-maven-actions-hello 1.1.0
+maven-actions-hello 2.0.0
 ```
 
 ## Аргументи командного рядка
