@@ -17,6 +17,7 @@ main
 ```text
 java/lab01
 java/lab02
+java/lab03
 ```
 
 Зміни додаються до `main` через Pull Request.
@@ -39,7 +40,7 @@ java/lab02
 Поточна версія:
 
 ```text
-2.0.0
+3.0.0
 ```
 
 ## Збірка і перевірка
@@ -71,25 +72,25 @@ java/lab02
 Після збірки створюється:
 
 ```text
-target/maven-actions-hello-2.0.0-all.jar
+target/maven-actions-hello-3.0.0-all.jar
 ```
 
 ## Запуск
 
 ```bash
-java -jar target/maven-actions-hello-2.0.0-all.jar
+java -jar target/maven-actions-hello-3.0.0-all.jar
 ```
 
 Перевірка версії:
 
 ```bash
-java -jar target/maven-actions-hello-2.0.0-all.jar --version
+java -jar target/maven-actions-hello-3.0.0-all.jar --version
 ```
 
 Результат:
 
 ```text
-maven-actions-hello 2.0.0
+maven-actions-hello 3.0.0
 ```
 
 ## Аргументи командного рядка
@@ -372,3 +373,12 @@ java -cp target/maven-actions-hello-3.0.0-all.jar ua.lpnu.kzp.setup.TrainingLoad
 **Версіонування:** джерело версії лише `pom.xml`, значення зчитується з manifest виконуваного JAR. `main` не містить константи версії.
 
 **Процес GitHub:** окрема гілка `java/lab03`, Issue(s), Pull Request із `Closes #N`, GitHub Actions на Windows/macOS/Ubuntu, JAR-артефакти, тег `v3.0.0` після merge.
+
+
+## Перевірка ЛР №3 на GitHub
+
+- [Pull Request #24](https://github.com/StanislavPavlovuch/kzp-bouchyk/pull/24), Issues #20–#23.
+- [Java CI run #40](https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/45199288159): Ubuntu, Windows і macOS — успішно.
+- JAR-артефакти: `jar-ubuntu-latest-40`, `jar-windows-latest-40`, `jar-macos-latest-40` (розділ Artifacts у run #40).
+- Фактичний результат: 34 JUnit-тести; SpotBugs — 0 помилок; Maven — BUILD SUCCESS.
+- Git-тег після merge: `v3.0.0`.
