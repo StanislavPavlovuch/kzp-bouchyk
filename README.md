@@ -17,6 +17,7 @@ main
 ```text
 java/lab01
 java/lab02
+java/lab03
 ```
 
 Зміни додаються до `main` через Pull Request.
@@ -39,7 +40,7 @@ java/lab02
 Поточна версія:
 
 ```text
-2.0.0
+3.0.0
 ```
 
 ## Збірка і перевірка
@@ -71,25 +72,25 @@ java/lab02
 Після збірки створюється:
 
 ```text
-target/maven-actions-hello-2.0.0-all.jar
+target/maven-actions-hello-3.0.0-all.jar
 ```
 
 ## Запуск
 
 ```bash
-java -jar target/maven-actions-hello-2.0.0-all.jar
+java -jar target/maven-actions-hello-3.0.0-all.jar
 ```
 
 Перевірка версії:
 
 ```bash
-java -jar target/maven-actions-hello-2.0.0-all.jar --version
+java -jar target/maven-actions-hello-3.0.0-all.jar --version
 ```
 
 Результат:
 
 ```text
-maven-actions-hello 2.0.0
+maven-actions-hello 3.0.0
 ```
 
 ## Аргументи командного рядка
@@ -331,3 +332,53 @@ CI перевіряє проєкт на:
 GitHub Actions:
 
 https://github.com/StanislavPavlovuch/kzp-bouchyk/actions
+---
+# Лабораторна робота №3 — спадкування, інтерфейси й поліморфізм
+
+**Варіант 2:** спортивні тренування. **Версія:** `3.0.0`.
+
+Ієрархія:
+
+```text
+LoadCalculable (interface: calculateLoad())
+        ↑ implements
+Training (спільні private final поля, валідація, fromCsv, equals/hashCode)
+    ├── IndoorTraining  (навантаження: minutes × 1.2 + calories × 0.1)
+    └── OutdoorTraining (навантаження: minutes + distanceKm × 10 + calories × 0.1)
+
+TrainingKind (enum: INDOOR / OUTDOOR / OTHER)
+TrainingLoadAnalyzer (поліморфний обхід List<Training>)
+TrainingLoadDemo (окрема точка входу для демонстрації)
+```
+
+Інтерфейс обрано замість перетворення `Training` на абстрактний клас, оскільки 21 тест із ЛР №1–2 використовує старий публічний конструктор `new Training(...)`. Конкретний базовий клас зберігає зворотну сумісність; `IndoorTraining` та `OutdoorTraining` перевизначають `calculateLoad()` за контрактом інтерфейсу. Вибір підтипу виконується лише у фабриці `Training.fromCsv()`; обробка списку не містить `instanceof` або `switch` за підтипом.
+
+`TrainingKind.fromActivity()` класифікує назви зі старого CSV. Для контрольного набору `Біг`/`Велосипед` — OUTDOOR, `Плавання` — INDOOR (басейн у приміщенні). Невідомі назви залишаються допустимими та створюють звичайний `Training` з категорією OTHER. Формули навантаження — **навчальні умовні коефіцієнти**, а не фізіологічні нормативи.
+
+## Команди macOS
+
+```bash
+./mvnw clean test
+./mvnw clean verify
+./mvnw clean package
+java -jar target/maven-actions-hello-3.0.0-all.jar
+java -jar target/maven-actions-hello-3.0.0-all.jar --version
+java -cp target/maven-actions-hello-3.0.0-all.jar ua.lpnu.kzp.setup.TrainingLoadDemo
+```
+
+Звичайна команда `java -jar` і її файл `data/report.txt` зберігають формат попередніх лабораторних. Окрема команда з `TrainingLoadDemo` виводить новий показник навантаження; це **не** змінює старий звіт. Додано 13 JUnit-тестів; попередні 21 збережено.
+
+Очікуваний старий звіт: 3 коректні записи, 155 хв, 32.00 км, 620 калорій. Очікуваний поліморфний підсумок на `data/input.csv`: 3 коректні записи, 623.00 у.о. сумарного й 328.00 у.о. максимального навантаження.
+
+**Версіонування:** джерело версії лише `pom.xml`, значення зчитується з manifest виконуваного JAR. `main` не містить константи версії.
+
+**Процес GitHub:** окрема гілка `java/lab03`, Issue(s), Pull Request із `Closes #N`, GitHub Actions на Windows/macOS/Ubuntu, JAR-артефакти, тег `v3.0.0` після merge.
+
+
+## Перевірка ЛР №3 на GitHub
+
+- [Pull Request #24](https://github.com/StanislavPavlovuch/kzp-bouchyk/pull/24), Issues #20–#23.
+- [Java CI run #40](https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/45199288159): Ubuntu, Windows і macOS — успішно.
+- JAR-артефакти: `jar-ubuntu-latest-40`, `jar-windows-latest-40`, `jar-macos-latest-40` (розділ Artifacts у run #40).
+- Фактичний результат: 34 JUnit-тести; SpotBugs — 0 помилок; Maven — BUILD SUCCESS.
+- Git-тег після merge: `v3.0.0`.
