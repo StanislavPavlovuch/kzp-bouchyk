@@ -89,9 +89,9 @@ java -cp target/maven-actions-hello-3.0.0-all.jar ua.lpnu.kzp.setup.TrainingLoad
 
 **Фактичні результати (23.11.2026):** `./mvnw clean verify` — `BUILD SUCCESS`; SpotBugs 4.10.5.0 — 0 bugs, 0 errors, 0 warnings. Виконуваний JAR `maven-actions-hello-3.0.0-all.jar` успішно запущено; `--version` повернув `maven-actions-hello 3.0.0`. У ході роботи після першої перевірки виправлено помилку SpotBugs `CT_CONSTRUCTOR_THROW` завдяки обмеженій ієрархії `sealed Training`.
 
-**GitHub CI на Ubuntu, Windows, macOS:** _[вставити фактичне посилання на зелений workflow]_.
+**GitHub CI на Ubuntu, Windows, macOS:** [Java CI #40 — 23.11.2026, успішно](https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/45199288159). Три перевірки `Verify on ubuntu-latest`, `Verify on windows-latest`, `Verify on macos-latest` завершилися зі статусом success.
 
-**JAR-артефакти:** _[посилання на сторінку Run → Artifacts]_.
+**JAR-артефакти:** у [GitHub Actions run #40](https://github.com/StanislavPavlovuch/kzp-bouchyk/actions/runs/45199288159) опубліковано `jar-ubuntu-latest-40`, `jar-windows-latest-40`, `jar-macos-latest-40`. Кожен містить виконуваний JAR.
 
 ## 11. GitHub Issues і Pull Request
 
@@ -100,11 +100,11 @@ java -cp target/maven-actions-hello-3.0.0-all.jar ua.lpnu.kzp.setup.TrainingLoad
 | [#20](https://github.com/StanislavPavlovuch/kzp-bouchyk/issues/20) | Базовий тип, інтерфейс і два підтипи | Компіляція і тести успішні |
 | [#21](https://github.com/StanislavPavlovuch/kzp-bouchyk/issues/21) | enum, фабрика й поліморфний аналіз | Запуск `TrainingLoadDemo` успішний |
 | [#22](https://github.com/StanislavPavlovuch/kzp-bouchyk/issues/22) | equals/hashCode, HashSet і JUnit | 34 тести без помилок |
-| [#23](https://github.com/StanislavPavlovuch/kzp-bouchyk/issues/23) | Документація, CI, JAR, версія | Локально Maven і SpotBugs успішні; CI очікує push |
+| [#23](https://github.com/StanislavPavlovuch/kzp-bouchyk/issues/23) | Документація, CI, JAR, версія | Maven/SpotBugs успішні, CI #40 зелений на трьох ОС, три JAR-артефакти |
 
-Pull Request: _[вставити реальне посилання]_. Для автоматичного закриття Issues в опис PR додати `Closes #N` із фактичними номерами.
+Pull Request: [#24 — Complete Java lab work 03](https://github.com/StanislavPavlovuch/kzp-bouchyk/pull/24). Опис PR містить `Closes #20`, `Closes #21`, `Closes #22`, `Closes #23`; задачі закриваються після merge.
 
-Git-тег після merge: `v3.0.0` — _[посилання після створення]_.
+Git-тег після merge: `v3.0.0` — [посилання на тег](https://github.com/StanislavPavlovuch/kzp-bouchyk/tree/v3.0.0). Тег необхідно створити з фінальної версії `main` після злиття PR.
 
 ## 12. Порівняння поведінки
 
@@ -122,11 +122,11 @@ Git-тег після merge: `v3.0.0` — _[посилання після ств
 
 Фактичний новий поліморфний підсумок на тих самих даних (запуск 23.11.2026): 623.00 у.о. сумарного навантаження та 328.00 у.о. найбільшого навантаження. Стандартний звіт залишився: 3 записи, 155 хв, 32.00 км, 620 калорій.
 
-**Фактичний `diff` контрольних звітів ЛР №2 і ЛР №3:** _[вставити скриншот/код завершення 0 після порівняння]_.
+**Порівняння:** усі чотири контрольні показники ЛР №2 та ЛР №3 збігаються за локальним запуском (3, 155 хв, 32.00 км, 620). Побайтове порівняння `diff` двох версій звіту окремо не запускалося; не заявляється як виконане.
 
 ## 13. Академічна доброчесність
 
-Для аналізу вимог, проектування сумісної ієрархії, підготовки варіантів реалізації й тестів та структурування документації використовувався ChatGPT. Ролі: Manager (план), Developer (варіант структури), Validator (тести), Reviewer (сумісність), DevOps (перевірки CI/Maven), Documenter (звіт). Прийнято підхід із конкретним `Training` і спільним інтерфейсом; відхилено перетворення `Training` на abstract, оскільки це зламало б попередні тести. Реальні запуск, перевірка результатів, коміти, PR і фінальна здача виконуються студентом.
+Для аналізу вимог, проектування сумісної ієрархії, підготовки варіантів реалізації й тестів та структурування документації використовувався ChatGPT. Ролі: Manager (план), Developer (варіант структури), Validator (тести), Reviewer (сумісність), DevOps (перевірки CI/Maven), Documenter (звіт). Прийнято підхід із конкретним `Training` і спільним інтерфейсом; відхилено перетворення `Training` на abstract, оскільки це зламало б попередні тести. Фактичні локальні запуски, перевірку результатів та git-коміт виконав студент. GitHub Issues і PR створено через підключення ChatGPT до GitHub за запитом студента; студент перевіряє результат і виконує фінальну здачу.
 
 ## 14. Відповіді на контрольні питання
 
@@ -153,4 +153,4 @@ Git-тег після merge: `v3.0.0` — _[посилання після ств
 
 ## 15. Висновки
 
-Розроблено варіант ієрархії для спортивних тренувань із сумісним базовим класом `Training`, інтерфейсом `LoadCalculable`, двома підтипами, enum і поліморфною обробкою. Застосовано узгоджені equals/hashCode і передбачено тести на HashSet, спадкування та регресійну сумісність. Локально підтверджено 34 успішні тести, чистий SpotBugs, запуск JAR та незмінність основних показників звіту. Після Pull Request і зеленого CI слід додати фактичні посилання на PR, workflow, артефакти й Git-тег.
+Розроблено варіант ієрархії для спортивних тренувань із сумісним базовим класом `Training`, інтерфейсом `LoadCalculable`, двома підтипами, enum і поліморфною обробкою. Застосовано узгоджені equals/hashCode і передбачено тести на HashSet, спадкування та регресійну сумісність. Локально підтверджено 34 успішні тести, чистий SpotBugs, запуск JAR та незмінність основних показників звіту. Pull Request #24, зелений GitHub Actions #40 та три JAR-артефакти підтверджені. Завершальний крок — merge PR і публікація тегу `v3.0.0`.
